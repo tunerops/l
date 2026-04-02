@@ -19,6 +19,7 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22222
           # Скрипт, который выполнится на вашем сервере Ubuntu
           script: |
             # 1. Очищаем папку, если она осталась от прошлого деплоя, и создаем заново 
