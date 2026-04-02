@@ -19,19 +19,10 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22222
-          # Скрипт, который выполнится на вашем сервере Ubuntu
           script: |
-            # 1. Очищаем папку, если она осталась от прошлого деплоя, и создаем заново 
             rm -rf /tmp/appdir
-            mkdir -p /tmp/appdir
-            
-            # 2. Клонируем ветку dev с нуля (замените ссылку на вашу!)
+            mkdir -p /tmp/appdir           
             git clone -b dev git@github.com:tunerops/l.git /tmp/appdir
-            
-            # 3. Синхронизируем ТОЛЬКО конфиг Nginx (обратите внимание на sudo и точные пути!)
-            # Предполагается, что в репозитории конфиг лежит в папке nginx/
             sudo rsync -avu /tmp/appdir/nginx/ /etc/nginx/
-            
-            # 4. Проверка и перезагрузка Nginx
             sudo nginx -t
             sudo systemctl reload nginx
