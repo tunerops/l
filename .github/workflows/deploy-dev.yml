@@ -26,7 +26,7 @@ jobs:
             rm -rf /tmp/appdir
             mkdir -p /tmp/appdir
             
-            # 2. Клонируем ветку dev с нуля (замените ссылку на вашу!)
+            # 2. Клонируем ветку dev с нуля (замените ссылку на вашу!) 
             git clone -b dev git@github.com:tunerops/l.git /tmp/appdir
             
             # 3. Синхронизируем ТОЛЬКО конфиг Nginx (обратите внимание на sudo и точные пути!)
