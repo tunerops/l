@@ -20,6 +20,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22222
           script: |
+            set -e
             rm -rf /tmp/appdir
             mkdir -p /tmp/appdir           
             git clone -b dev git@github.com:tunerops/l.git /tmp/appdir
