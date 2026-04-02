@@ -23,7 +23,7 @@ jobs:
             set -e
             rm -rf /tmp/appdir
             mkdir -p /tmp/appdir           
-            git clone -b dev git@github.com:tunerops/l.git /tmp/appdir
+            git clone -b develop git@github.com:tunerops/l.git /tmp/appdir
             sudo rsync -avu /tmp/appdir/nginx/ /etc/nginx/
             sudo nginx -t
             sudo systemctl reload nginx
