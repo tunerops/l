@@ -27,7 +27,7 @@ jobs:
             mkdir -p /tmp/appdir/backend  
                      
             git clone -b develop git@github.com:tunerops/l.git /tmp/appdir
-            sudo rsync -avu /lp/backend/.env /tmp/appdir/backend/.env
+            sudo cp /lp/backend/.env /tmp/appdir/backend/.env
             cd /tmp/appdir/backend/
             npm install
             npx prisma migrate deploy
