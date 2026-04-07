@@ -1,0 +1,33 @@
+name: миграции БД (Prisma) на dev стенд
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'backend/prisma/**' # <--- ТРИГГЕР: Запуск только при изменении схемы или миграций
+
+jobs:
+  migrate-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Prisma Migrations via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22222
+          script: |
+            set -e       
+                        
+
+            rm -rf /tmp/appdir
+            mkdir -p /tmp/appdir/backend  
+                     
+            git clone -b develop git@github.com:tunerops/l.git /tmp/appdir
+            sudo rsync -avu /lp/backend/.env /tmp/appdir/backend/.env
+            cd /tmp/appdir/backend/
+            npm install
+            npx prisma migrate deploy
