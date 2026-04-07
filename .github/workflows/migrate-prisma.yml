@@ -24,7 +24,7 @@ jobs:
                         
 
             rm -rf /tmp/appdir
-            mkdir -p /tmp/appdir/backend  
+            mkdir -p /tmp/appdir 
                      
             git clone -b develop git@github.com:tunerops/l.git /tmp/appdir
             sudo cp /lp/backend/.env /tmp/appdir/backend/.env
