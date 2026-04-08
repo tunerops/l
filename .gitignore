@@ -1,10 +1,6 @@
 # Зависимости (игнорируем во всех папках)
 node_modules/
 
-# Переменные окружения (во всех папках)
-.env
-.env.*.local
-
 # Папки сборок
 /frontend/dist/
 /frontend/build/
@@ -13,3 +9,21 @@ node_modules/
 # Логи и кэши
 npm-debug.log*
 .eslintcache
+
+
+# Переменные окружения
+.env
+.env.local
+.env.*.local
+
+# Сборки
+dist/
+build/
+
+# Логи
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
