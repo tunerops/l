@@ -1,0 +1,30 @@
+name: деплой nginx на dev стенд
+
+on:
+  push:
+    branches:
+      - develop
+    paths:
+      - 'nginx/**' 
+
+jobs:
+  deploy-nginx:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy Nginx config via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: 22222
+          script: |
+            set -e
+            rm -rf /tmp/appdir
+            mkdir -p /tmp/appdir           
+            git clone -b develop git@github.com:tunerops/l.git /tmp/appdir
+            # Обратите внимание на путь: теперь мы копируем ИЗ папки nginx в клонированном репо
+            sudo rsync -avu /tmp/appdir/nginx/ /etc/nginx/
+            sudo nginx -t
+            sudo systemctl reload nginx         
